@@ -1,14 +1,6 @@
 import './App.css';
 import react from 'react';
 
-const posts = [
-  { id: 1, title: 'Pilne: Co to był za dzień!', intro: 'Tego świat jeszcze nie widział'},
-  { id: 2, title: 'Wszyscy zazdroszą Polakom!', intro: 'Takiego clickbajtowego tytułu jeszcze nikt nie wymyślił'},
-  { id: 3, title: 'Adam Małysz Zgolił wąs',
-    intro: 'Po przegranym zakładzie z Piotrem Żyłą nasz mistrz olimpijski zgolił wąsy'
-  }
-]
-
 const styleComponents = {
   backgroundColor:'#b2bec3',
   border:'#080a0a 1px solid',
@@ -37,30 +29,34 @@ const styleComponents = {
 };
 
 class BlogTile extends react.Component{
+  state = {
+    second : 0
+  }
+
+  componentDidMount(){
+    setInterval(() =>{
+      this.setState({second : increments(this.state.second)});}, 1000);
+  }
+
   render(){
-    const {title, intro} = this.props;
+    const {second} = this.state;
     return(
       <div style={styleComponents}>
-        <h2>{title}</h2>
-        <p style={styleComponents.paragraf}>{intro}</p>
+        <p>{second}</p>
       </div>
     );
   }
+}
 
+function increments(sec){
+  sec ++;
+  return sec;
 }
 
 function App() {
-  const checkIntro = (cos) =>{
-    return(
-      <>{cos.substring(0,25) + `...`}</>
-    );
-  }
   return (
     <div>
-      {posts.map((elem, index) => (
-         //<div><h2>{elem.title}</h2><p>{checkIntro(elem.intro)}</p></div>
-         <BlogTile key={elem.id} title={elem.title} intro={checkIntro(elem.intro)}/>
-      ))}
+      <BlogTile />
     </div>
   );
 }
