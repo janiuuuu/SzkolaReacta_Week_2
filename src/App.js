@@ -52,13 +52,12 @@ class BlogTile extends react.Component{
 function App() {
   const checkIntro = (cos) =>{
     return(
-      <>{cos.substring(0,25) + `...`}</>
+      <>{`${cos.substring(0,25)} ...`}</>
     );
   }
   return (
     <div>
-      {posts.map((elem, index) => (
-         //<div><h2>{elem.title}</h2><p>{checkIntro(elem.intro)}</p></div>
+      {posts.map((elem) => (
          <BlogTile key={elem.id} title={elem.title} intro={checkIntro(elem.intro)}/>
       ))}
     </div>
