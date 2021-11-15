@@ -34,8 +34,12 @@ class BlogTile extends react.Component{
   }
 
   componentDidMount(){
-    setInterval(() =>{
+    this.timer = setInterval(() =>{
       this.setState({second : increments(this.state.second)});}, 1000);
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.timer);
   }
 
   render(){
